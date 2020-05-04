@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,26 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+
+
+Route::get('/', function(){
+    return view('pages.login');
 });
+
+Route::post('/', 'LoginController@store');
+
+Route::get('/webapp', function(){
+    if(session('logged') == true){
+        return view('layouts.webapp');
+    }
+    else{
+        return redirect('/');
+    }
+});
+
+Route::get('/webapp/add/path', 'webappController@create');
+Route::post('/webapp/add/img', 'webappController@store');
+
+//Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
