@@ -34,14 +34,7 @@ class webappController extends Controller
      */
     public function create(Request $request)
     {
-        $path = $request->input('path');
-        if(is_dir($path)){
-            DB::update('UPDATE users set imgPath = ? where username = ?', [$path, 'dijak1']);
-        }
-        else{
-            return redirect('/webapp')->with('display', "Napačen vpis poti ali pa vnesena pot ne obstaja!");
-        }
-        return redirect('/webapp')->with('display', 'Pot nastavljena na: '.$path);
+       
     }
 
     /**
@@ -60,10 +53,9 @@ class webappController extends Controller
        $img = $_FILES['img']['name'];
        $img_tmp = $_FILES['img']['tmp_name'];
 
-       move_uploaded_file($img_tmp, "D:\Programiranje\Projekti/20200502_vovko\public\img/".$img);
+       move_uploaded_file($img_tmp, "/var/www/20200502_vovko/storage/app/public/".$img);
 
        DB::insert('insert into images (imgName) values (?)', [$img]);
-
        return redirect('/webapp');
 
     }
