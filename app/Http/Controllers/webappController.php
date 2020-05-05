@@ -17,7 +17,14 @@ class webappController extends Controller
      */
     public function index()
     {
+        $images = DB::select('select imgName from images');
 
+        if(session('logged') == true){
+            return view('layouts.webapp', ['images' => $images]);
+        }
+        else{
+            return redirect('/');
+        }
     }
 
     /**
@@ -46,14 +53,16 @@ class webappController extends Controller
     public function store(Request $request)
     {
 
-       $path = DB::select('select imgPath from users where username = ?', ['dijak1']);
+       //$path = DB::select('select imgPath from users where username = ?', ['dijak1']);
        //Uploads image
 
-       $pathUser = $path[0]->imgPath;
+       //$pathUser = $path[0]->imgPath;
        $img = $_FILES['img']['name'];
        $img_tmp = $_FILES['img']['tmp_name'];
 
-       move_uploaded_file($img_tmp, $pathUser."/".$img);
+       move_uploaded_file($img_tmp, "D:\Programiranje\Projekti/20200502_vovko\public\img/".$img);
+
+       DB::insert('insert into images (imgName) values (?)', [$img]);
 
        return redirect('/webapp');
 

@@ -16,7 +16,6 @@ class UserSeeder extends Seeder
             'idUser' => 1,
             'username' => 'dijak1',
             'password'=> 'scnm',
-            'imgPath' => null
         ]);
     }
 }

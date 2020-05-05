@@ -11,18 +11,30 @@
     <title>Document</title>
 </head>
 <body>
+    <style>
+        img{
+            height: 100%;
+            width: 90%
+        }
+        @media only screen and (max-width: 991px){
+            img{
+                margin-top: 10px;
+                padding-top: 10px;
+                margin: 0 auto;
+            }
+        }
+    </style>
     <div class="container-fluid">
-        <div class="row">
-            <div class = "col-xl-6">
-                @include('includes.addPath')
-            </div>
-
-        </div>
         <hr>
         <div class="row">
             <div class = "col-xl-6">
                 @include('includes.addImage')
             </div>
+        </div>
+        <div class = "row">
+            @foreach ($images as $image)
+                <div class = "col-xl-3 col-lg-6 col-md-12 col-sm-12"><img src = "{{ asset('img/vid.bukovec2.png.png') }}"></div>
+            @endforeach
         </div>
     </div>
 </body>

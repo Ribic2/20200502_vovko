@@ -22,14 +22,7 @@ Route::get('/', function(){
 
 Route::post('/', 'LoginController@store');
 
-Route::get('/webapp', function(){
-    if(session('logged') == true){
-        return view('layouts.webapp');
-    }
-    else{
-        return redirect('/');
-    }
-});
+Route::get('/webapp', 'webappController@index');
 
 Route::get('/webapp/add/path', 'webappController@create');
 Route::post('/webapp/add/img', 'webappController@store');
